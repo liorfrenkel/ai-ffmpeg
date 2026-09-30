@@ -46,8 +46,7 @@ naming → done-criteria) and a row in this table.
 
 | File | Subject |
 | --- | --- |
-| `ai_docs/transitions.md` | **Transition types** — cut / glide / ease out: vocabulary-to-recipe lookup (read first) |
-| `ai_docs/timeline-hops.md` | Moving a crop position mid-clip (nested `if(lt(t,…))`) |
-| `ai_docs/glides.md` | **Glides** — smooth pan transitions between crop hops (hold → glide → arrive on the beat) |
+| `ai_docs/transitions.md` | **Transition types + recipes** — cut / glide / ease out (types, defaults, formulas, gotchas; read first) |
+| `ai_docs/timeline-hops.md` | Moving a crop position mid-clip (nested `if(lt(t,…))`, chain mechanics) |
 | `ai_docs/verification.md` | Proving an edit correct without viewing pixels (PSNR) |
 | `ai_docs/conventions.md` | Output naming, placement, hygiene |
