@@ -1,0 +1,7 @@
+{
+  "allowedLabels": [
+    "ffprobe",
+    "ffmpeg",
+    "shasum"
+  ]
+}

@@ -1,0 +1,53 @@
+# AGENTS.md — video editing with ffmpeg
+
+This repo edits videos. You describe an edit (cut a range, change resolution,
+combine, transcode…), hand over the source file(s), and the agent produces a
+**new file**. The recipe for each kind of edit lives in `ai_docs/jobs/`;
+shared techniques are in the docs beside them.
+
+## First principles (never violate)
+
+1. **Never modify a source file.** Every request renders a **new output file**
+   with ffmpeg. Sources stay byte-identical.
+2. **Probe before you act.** `ffprobe` the input (resolution, fps, duration,
+   codecs, SAR) before writing any command — never assume anything about a
+   file the user hands you.
+3. **Every request maps to a job doc.** Read the relevant `ai_docs/jobs/*.md`
+   and follow it end to end: probe → compute → render → verify → report.
+4. **Verify before claiming success.** Check output properties with `ffprobe`
+   (dimensions, fps, duration, streams). Never run pixel/PSNR checks on a
+   generated video — the user verifies visually (rule 6).
+5. **Report what you did.** Name the output, the exact geometry/options used,
+   and the verification numbers. Never claim success without verification.
+6. **No pixel-verification of generated videos.** Do not run PSNR, frame dumps,
+   or any pixel-level checks on outputs. Tell the user the output path and what
+   was done so **they** can look at it and verify.
+
+## Working directory
+
+- All media — source videos **and** rendered outputs — lives in `videos/`
+  (git-ignored via `.gitignore`). Always work there; never write media into
+  the repo tree outside `videos/`.
+- **Never delete rendered outputs.** Every render stays in `videos/`;
+  if the user wants a file removed they will remove it themselves.
+
+## Documentation index
+
+### Jobs — one file per edit type
+
+| File | Edit |
+| --- | --- |
+| `ai_docs/jobs/9x16.md` | Cut a range + horizontal slice → 9:16 (1080×1920) social clip |
+
+New edit type → new doc in `ai_docs/jobs/` (recipe → math → encoding →
+naming → done-criteria) and a row in this table.
+
+### Techniques — shared knowledge
+
+| File | Subject |
+| --- | --- |
+| `ai_docs/transitions.md` | **Transition types** — cut / glide / ease out: vocabulary-to-recipe lookup (read first) |
+| `ai_docs/timeline-hops.md` | Moving a crop position mid-clip (nested `if(lt(t,…))`) |
+| `ai_docs/glides.md` | **Glides** — smooth pan transitions between crop hops (hold → glide → arrive on the beat) |
+| `ai_docs/verification.md` | Proving an edit correct without viewing pixels (PSNR) |
+| `ai_docs/conventions.md` | Output naming, placement, hygiene |
