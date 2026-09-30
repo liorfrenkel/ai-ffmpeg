@@ -31,6 +31,13 @@ shared techniques are in the docs beside them.
 - **Never delete rendered outputs.** Every render stays in `videos/`;
   if the user wants a file removed they will remove it themselves.
 
+## Skill
+
+- `9x16-social` (`.agents/skills/9x16-social/`) — convert a horizontal video
+  to a 9:16 vertical clip for social. Use it for any "social" / "9:16" /
+  "vertical" request. Deterministic renderer bundled at
+  `.agents/skills/9x16-social/scripts/render-9x16.sh`.
+
 ## Documentation index
 
 ### Jobs — one file per edit type

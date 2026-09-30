@@ -2,6 +2,7 @@
   "allowedLabels": [
     "ffprobe",
     "ffmpeg",
-    "shasum"
+    "shasum",
+    ".agents/skills/9x16-social/scripts/render-9x16.sh"
   ]
 }
