@@ -41,6 +41,13 @@ keeps a minimum arrival speed `A·(ΔX/D)`: `A=0.3` = ~29 px/s arrival on a
 | "ease out / slow down at the end / smooth into X" | ease out |
 | "not too slow at the end" | raise `A` (crawl dial) |
 | "500 ms before the time" | D = 0.5 s, window ends at T |
+| "start a transition at S, D long" / "at 0:57, ease out over 3 s" | **arrival T = S + D** → e.g. `60:240:easeout:3` (window `[57, 60]`) — say the arrival out loud before rendering |
+
+## User phrasing quirks (real session notes)
+
+- **"earlier/later / before/after" is ambiguous** — "cut it 300 ms earlier" could touch start, end, or an arrival. State the interpretation you're building ("end → 0:38.7") and offer the flip.
+- **Users give odd positions (85 px); renderer requires even.** Round down to even (85 → 84) and flag it — sub-pixel at 4× upscale, but say it in the report; the user then adopts the rounded number.
+- **Two-step edits on arrival times are common** ("arrive 44 is late, make it 200 ms before" → rebuild that arrival at T−X). Don't shift neighbours; the hold absorbs the delta.
 
 ## Buildable example (2 glides, D = 0.5)
 

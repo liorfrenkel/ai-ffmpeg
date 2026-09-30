@@ -20,6 +20,10 @@ ffmpeg -y -ss "$START" -i "$SRC" -t "$DUR" \
   `-ss` after `-i`.
 - Geometry is carried over untouched; `format=yuv420p` only normalizes
   pixel format for the encoder.
+- **Cuts land on frame boundaries.** `-t`/`-to` round to the nearest output
+  frame (30 fps → 33.3 ms steps): 38.85 s end cut rendered 14.37 s
+  (431 frames), not 14.35 s. Report the frame-quantized duration, not the
+  user's decimal.
 
 ## Crop math
 
