@@ -20,7 +20,8 @@ parameters.
 ## Layout
 
 ```
-ai_docs/jobs/       Recipes per edit type (9:16 conversion, simple cut, …)
+ai_docs/jobs/       Recipes per edit type (9:16 conversion, simple cut,
+                    blurred-background 9:16 bars, …)
 ai_docs/            Shared techniques: transitions, mid-clip crop hops,
                     verification, naming conventions
 .agents/skills/     Reusable agent skills (9x16-social w/ bundled renderer)

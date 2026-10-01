@@ -46,6 +46,7 @@ shared techniques are in the docs beside them.
 | --- | --- |
 | `ai_docs/jobs/9x16.md` | Cut a range + horizontal slice → 9:16 (1080×1920) social clip |
 | `ai_docs/jobs/cut.md` | Simple cut: trim a range, keep source geometry |
+| `ai_docs/jobs/blur.md` | Blurred background: 9:16 bars above/below a centered landscape video |
 
 New edit type → new doc in `ai_docs/jobs/` (recipe → math → encoding →
 naming → done-criteria) and a row in this table.
