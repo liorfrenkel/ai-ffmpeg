@@ -48,6 +48,7 @@ shared techniques are in the docs beside them.
 | `ai_docs/jobs/cut.md` | Simple cut: trim a range, keep source geometry |
 | `ai_docs/jobs/blur.md` | Blurred background: 9:16 bars above/below a centered landscape video |
 | `ai_docs/jobs/text-overlay.md` | Static text overlay via pango PNG → ffmpeg overlay (Hebrew/ETL-safe) |
+| `ai_docs/jobs/1x1-move.md` | Square 1:1 clip: cut range + moving crop window (eased top/middle/bottom pans, VFR frame mapping, afade trap) |
 
 New edit type → new doc in `ai_docs/jobs/` (recipe → math → encoding →
 naming → done-criteria) and a row in this table.
@@ -60,3 +61,4 @@ naming → done-criteria) and a row in this table.
 | `ai_docs/timeline-hops.md` | Moving a crop position mid-clip (nested `if(lt(t,…))`, chain mechanics) |
 | `ai_docs/verification.md` | Proving an edit correct without viewing pixels (PSNR) |
 | `ai_docs/conventions.md` | Output naming, placement, hygiene |
+| `ai_docs/vfr.md` | Variable frame rate: detect, map frame→pts, cut by frame index |

@@ -24,6 +24,9 @@ ffmpeg -y -ss "$START" -i "$SRC" -t "$DUR" \
   frame (30 fps → 33.3 ms steps): 38.85 s end cut rendered 14.37 s
   (431 frames), not 14.35 s. Report the frame-quantized duration, not the
   user's decimal.
+- **VFR source?** (check `ffprobe`: `r_frame_rate` vs `avg_frame_rate`):
+  frame numbers ≠ seconds — map frames to pts and cut by frame index per
+  `ai_docs/vfr.md`.
 
 ## Crop math
 

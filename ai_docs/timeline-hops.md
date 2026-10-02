@@ -25,6 +25,12 @@ ffmpeg -y -i "$SRC" -ss START -t DUR -vf "crop=$CW:$CH:'if(lt(t,$S1),$X0,…)':0
 If `-ss` moves before `-i`, timestamps reset at the seek and `t` starts at 0 —
 every hop time would be silently wrong. Keep `-i` first, always.
 
+**This applies to audio filters too.** With `-ss` after `-i`, the whole filter
+graph runs on original timestamps — `afade=t=out:st=…` is also original-time,
+NOT clip-relative. A "fade in the last second" needs `st = (START+DUR) − 1`.
+Example that fired ~6 s early: clip START 5.8667 / DUR 24.1333 → fade must be
+`st=29` (original 29.0–30.0), not `st=23.13`.
+
 ## Endpoints
 
 - The last segment's position persists to the clip end (no closing condition).
