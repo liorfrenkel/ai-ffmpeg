@@ -41,7 +41,7 @@ so the boundary lands exactly regardless of timestamps:
 
 ```bash
 ffmpeg -y -i "$SRC" \
-  -vf "select='lt(n,F)',format=yuv420p" \
+  -vf "select='lt(n,F)',setpts=PTS-STARTPTS,format=yuv420p" \
   -af "atrim=end=PTSoFF,asetpts=PTS-STARTPTS" \
   -c:v libx264 -crf 18 -preset medium -c:a aac -b:a 160k -movflags +faststart OUT.mp4
 ```
@@ -49,6 +49,11 @@ ffmpeg -y -i "$SRC" \
 - `F` = exclusive last frame; `PTSoFF` = pts of frame `F` (audio can't be
   counted by `n` — it's a separate stream, so trim it by the time that ends
   the same range).
+- **Always `setpts=PTS-STARTPTS` on video too.** If the cut starts in the
+  middle of the source, `select` keeps original pts (e.g. first frame at
+  199.5s) while audio restarts at 0 — the muxer writes a full-length
+  container and players show **black until the video's start pts**. Rebase
+  the video timestamps or A/V drift apart (ktana_brighter_cut incident).
 - Do **not** size the cut with `-t SECONDS` on VFR: a second counted from
   `avg_frame_rate` lands on a different frame than the one the user meant
   (e.g. 17.166 s of a ~29.374 fps stream ≈ 504 frames, not 515).
